@@ -1,110 +1,79 @@
 # Deploying Visual Themes
 
-Target repository: **https://github.com/Surenkh/dsh-visual-themes** (public)
+Published repository: **https://github.com/Surenkh/dsh-visual-themes**
 Package name: **`@surenkh/dsh-visual-themes`**
-Release: **`v1.1.0`**
+Current release: **`v1.1.0`** — https://github.com/Surenkh/dsh-visual-themes/releases/tag/v1.1.0
 
-This repository is committed locally and tagged `v1.1.0`. The source, design references, tests, docs and release assets are ready.
+## Published assets
 
-## Why the push is not automatic here
+- `dsh-visual-themes-1.1.0.zip` — complete source archive; installable by pointing the DSH plugin manager at the extracted folder.
+- `SHA256SUMS.txt` — SHA-256 checksums.
 
-The sandbox used to prepare this release has **no GitHub credentials** and cannot reach GitHub from its shell:
-
-- `gh` (GitHub CLI) is not installed;
-- no `GITHUB_TOKEN` / `GH_TOKEN` is present;
-- there is no SSH key in `~/.ssh`;
-- `git`/`curl` HTTPS requests fail with `schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS` (TLS credentials are unavailable in this environment), and the credential manager has no stored GitHub password.
-
-Creating the remote repository and pushing therefore have to be done from a machine with GitHub authentication. Everything below is ready to run.
-
-## 1. Authenticate
-
-Use one of:
-
-```bash
-gh auth login
-```
-
-or create a GitHub personal access token with `repo` scope and use it as the HTTPS password when Git asks, or add an SSH key to GitHub and use the SSH remote.
-
-## 2. Create the repository
-
-With GitHub CLI, from the repository root:
-
-```bash
-gh repo create Surenkh/dsh-visual-themes --public --source=. --remote=origin --push
-git push origin v1.1.0
-```
-
-Without `gh`, create an empty **public** repository named `dsh-visual-themes` under `Surenkh` on github.com, then:
-
-```bash
-git remote add origin https://github.com/Surenkh/dsh-visual-themes.git
-git push -u origin main
-git push origin v1.1.0
-```
-
-The intended remote is already configured as `origin`; if you use `gh repo create --source=.`, it may add the same remote, which is fine.
-
-## 3. Repository settings
-
-Suggested description:
-
-> Eleven switchable visual themes for the DeepSeek Harness workspace, with a compact picker panel and persisted selection.
-
-Suggested topics:
+Release download base:
 
 ```
-deepseek-harness  dsh  plugin  themes  visual-themes  retro  aqua  glass  ui
+https://github.com/Surenkh/dsh-visual-themes/releases/download/v1.1.0/
 ```
 
-Homepage: the repository README (leave empty) or the Releases page.
+The uploaded ZIP digest is `sha256:f62707a0a7a17fc0fcf795c43bf8532b23dbc8f65ee6996f37197323ad08712b`.
 
-## 4. Publish the release
+## Repository settings
 
-The release assets live in `release/`:
+- Description: **Eleven switchable visual themes for the DeepSeek Harness workspace, with a compact picker panel and persisted selection.**
+- Homepage: the repository README.
+- Topics: `deepseek-harness`, `dsh`, `plugin`, `themes`, `visual-themes`, `retro`, `aqua`, `glass`, `ui`.
+- License: MIT.
 
-- `release/dsh-visual-themes-1.1.0.zip` — complete source archive (plugin, docs, tests, 11 design references), installable by pointing the DSH plugin manager at the extracted folder;
-- `release/SHA256SUMS.txt` — checksums;
-- `release/RELEASE_NOTES-1.1.0.md` — release text.
+## Release process for future versions
 
-With GitHub CLI:
+1. **Bump the version** in `package.json`, the README badge and `CHANGELOG.md`.
+2. **Run the checks**:
+   ```bash
+   npm test
+   npm run check
+   ```
+3. **Commit and tag**:
+   ```bash
+   git add -A
+   git commit -m "feat: Visual Themes X.Y.Z"
+   git tag -a vX.Y.Z -m "Visual Themes X.Y.Z"
+   git push origin main
+   git push origin vX.Y.Z
+   ```
+4. **Build the source archive** from the tag/commit:
+   ```bash
+   git archive --format=zip --prefix=dsh-visual-themes-X.Y.Z/ \
+     -o release/dsh-visual-themes-X.Y.Z.zip HEAD
+   ```
+5. **Write the checksum**:
+   ```bash
+   sha256sum release/dsh-visual-themes-X.Y.Z.zip > release/SHA256SUMS.txt
+   ```
+   On PowerShell:
+   ```powershell
+   $hash = (Get-FileHash 'release\dsh-visual-themes-X.Y.Z.zip' -Algorithm SHA256).Hash.ToLower()
+   "$hash  dsh-visual-themes-X.Y.Z.zip" | Set-Content 'release\SHA256SUMS.txt'
+   ```
+6. **Write release notes** in `release/RELEASE_NOTES-X.Y.Z.md`.
+7. **Create the GitHub release** with the CLI:
+   ```bash
+   gh release create vX.Y.Z \
+     release/dsh-visual-themes-X.Y.Z.zip \
+     release/SHA256SUMS.txt \
+     --title "Visual Themes X.Y.Z" \
+     --notes-file release/RELEASE_NOTES-X.Y.Z.md
+   ```
+   Or use **Releases → Draft a new release**, select the tag and attach both files.
+8. **Verify** the release page shows both assets and the source links; download the ZIP and confirm its digest matches `SHA256SUMS.txt`.
 
-```bash
-gh release create v1.1.0 \
-  release/dsh-visual-themes-1.1.0.zip \
-  release/SHA256SUMS.txt \
-  --title "Visual Themes 1.1.0" \
-  --notes-file release/RELEASE_NOTES-1.1.0.md
-```
+## Local verification already performed
 
-Or use **Releases → Draft a new release** on GitHub, choose the tag `v1.1.0`, paste the notes and attach the two files.
+- `node --check client.js` and `node --check index.js`.
+- `npm test` — 11 theme registrations, 11 picker cards in order, selection/persistence, restore, external theme fallback and disposal.
+- The release archive was extracted and its test suite passed independently.
+- The plugin bundle installs as `@surenkh/dsh-visual-themes@1.1.0`; the picker exposes 11 cards; the removed Liquid Glass state normalizes to the original appearance.
 
-## 5. If the owner or repository name differs
+## Notes
 
-Update every place that contains the current URL/name:
-
-- `package.json`: `name`, `homepage`, `repository`, `bugs`;
-- `README.md`: badges/links, clone URL, release URL;
-- `INSTALL.md`: clone URL and release name;
-- `cordis.patch.yml` and `client.js`: the package/module id `@surenkh/dsh-visual-themes`;
-- this file.
-
-Then rebuild the archive and tag a new version (or amend before the first push).
-
-## 6. Verify after publishing
-
-1. Open the repository; the README renders with the 11 design references.
-2. Create a fresh clone in a temporary folder.
-3. Install it with the plugin manager; the picker shows 11 cards.
-4. Download the release ZIP; extract it; install that folder too (the package root contains `package.json`).
-5. Confirm the saved selection survives a restart and **Restore original** works.
-
-## What was verified locally
-
-- `node --check client.js` and `node --check index.js`;
-- `npm test` — the dependency-free Client harness passes for 11 themes, the picker order, selection/persistence, restore, external theme changes and disposal;
-- the plugin bundle installs from this folder and the picker exposes 11 cards;
-- the removed theme's saved state normalizes to the original appearance.
-
-The visual result in the running GUI could not be captured from this sandbox; the release should be visually checked on the target machine.
+- The GitHub repository, description, homepage, topics, MIT license, tag `v1.1.0` and release assets are live.
+- The native OS title bar remains outside the page and cannot be themed by a Web plugin; the themes style only the in-window app surface.

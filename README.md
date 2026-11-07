@@ -203,7 +203,7 @@ See [CHANGELOG.md](CHANGELOG.md) for details.
 
 ## Publishing
 
-The repository is prepared for GitHub. See [DEPLOY.md](DEPLOY.md) for the remote, push and release steps, including the release archive and checksums.
+Published at **https://github.com/Surenkh/dsh-visual-themes**. Release **v1.1.0** ships the source archive and SHA-256 checksums on the [Releases](https://github.com/Surenkh/dsh-visual-themes/releases) page. [DEPLOY.md](DEPLOY.md) documents the repeatable release process.
 
 ## License
 
