@@ -1,0 +1,63 @@
+{
+  "name": "@surenkh/dsh-visual-themes",
+  "version": "1.1.0",
+  "description": "Eleven switchable visual themes for the DeepSeek Harness workspace, with a compact picker panel and persisted selection.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Suren Khachatryan",
+  "homepage": "https://github.com/Surenkh/dsh-visual-themes#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Surenkh/dsh-visual-themes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Surenkh/dsh-visual-themes/issues"
+  },
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "plugin",
+    "theme",
+    "themes",
+    "ui",
+    "visual-themes",
+    "retro",
+    "aqua"
+  ],
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "INSTALL.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node test/client.test.mjs",
+    "check": "node --check client.js && node --check index.js"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-theme",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  }
+}

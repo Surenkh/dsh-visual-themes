@@ -1,0 +1,4 @@
+- insert:
+    - id: visual-themes
+      name: '@surenkh/dsh-visual-themes'
+
