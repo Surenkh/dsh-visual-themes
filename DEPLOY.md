@@ -2,12 +2,12 @@
 
 Published repository: **https://github.com/Surenkh/dsh-visual-themes**
 Package name: **`@surenkh/dsh-visual-themes`**
-Current release: **`v1.1.0`** — https://github.com/Surenkh/dsh-visual-themes/releases/tag/v1.1.0
+Current release: **`v1.1.0`** - https://github.com/Surenkh/dsh-visual-themes/releases/tag/v1.1.0
 
 ## Published assets
 
-- `dsh-visual-themes-1.1.0.zip` — complete source archive; installable by pointing the DSH plugin manager at the extracted folder.
-- `SHA256SUMS.txt` — SHA-256 checksums.
+- `dsh-visual-themes-1.1.0.zip` - complete source archive; installable by pointing the DSH plugin manager at the extracted folder.
+- `SHA256SUMS.txt` - SHA-256 checksums.
 
 Release download base:
 
@@ -63,13 +63,13 @@ The uploaded ZIP digest is `sha256:f62707a0a7a17fc0fcf795c43bf8532b23dbc8f65ee69
      --title "Visual Themes X.Y.Z" \
      --notes-file release/RELEASE_NOTES-X.Y.Z.md
    ```
-   Or use **Releases → Draft a new release**, select the tag and attach both files.
+   Or use **Releases -> Draft a new release**, select the tag and attach both files.
 8. **Verify** the release page shows both assets and the source links; download the ZIP and confirm its digest matches `SHA256SUMS.txt`.
 
 ## Local verification already performed
 
 - `node --check client.js` and `node --check index.js`.
-- `npm test` — 11 theme registrations, 11 picker cards in order, selection/persistence, restore, external theme fallback and disposal.
+- `npm test` - 11 theme registrations, 11 picker cards in order, selection/persistence, restore, external theme fallback and disposal.
 - The release archive was extracted and its test suite passed independently.
 - The plugin bundle installs as `@surenkh/dsh-visual-themes@1.1.0`; the picker exposes 11 cards; the removed Liquid Glass state normalizes to the original appearance.
 

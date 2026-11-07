@@ -35,7 +35,7 @@ Install the checkout folder (the folder containing `package.json`) with the same
 
 ## First-run verification
 
-1. **Sidebar → Visual themes** opens the picker in the main area.
+1. **Sidebar -> Visual themes** opens the picker in the main area.
 2. The picker shows **11 theme cards** in this order: Deep Space, Sage Studio, Ember Terminal, Neon Pulse, Swiss Studio, Retro Desktop, Aurora Glass, Ivory & Plum, Ivory & Navy, Y2K Aqua, Retro Mint Desktop.
 3. Click a card. The whole workspace updates immediately; the card becomes outlined and checked.
 4. Restart the app. The same theme is still active.
@@ -52,7 +52,7 @@ plugin_manager action=remove_bundle target=@local/dsh-visual-themes
 plugin_manager action=install_bundle target="<absolute path to the 1.1.0 folder>"
 ```
 
-If the saved selection referred to a theme that no longer exists, the plugin normalizes it to *Original appearance* and the app returns to its host look on the next load. The saved state can also be cleared manually — see [State and reset](#state-and-reset).
+If the saved selection referred to a theme that no longer exists, the plugin normalizes it to *Original appearance* and the app returns to its host look on the next load. The saved state can also be cleared manually - see [State and reset](#state-and-reset).
 
 ## Uninstall
 
@@ -64,7 +64,7 @@ Removing the bundle unregisters all 11 themes, removes the plugin's `<style>` no
 
 ## State and reset
 
-- **Host state**: `<DSH_HOME>/visual-themes.json` — `{ "theme": "<key|null>", "mode": "light|dark", "at": <epoch-ms> }`.
+- **Host state**: `<DSH_HOME>/visual-themes.json` - `{ "theme": "<key|null>", "mode": "light|dark", "at": <epoch-ms> }`.
 - **Local state**: `localStorage["dsh-visual-themes/state/v1"]` in the Web GUI origin.
 - To reset to the original appearance, use **Restore original** in the picker. To erase all memory of the theme, remove the bundle and delete the state file.
 - The host route is same-origin:

@@ -8,7 +8,7 @@ Eleven hand-built, switchable visual themes for the **DeepSeek Harness** workspa
 
 This repository is the plugin source, the design references for every theme, and a dependency-free verification harness.
 
-> **v1.1.0** â€” eleven themes, updated metadata and a GitHub-ready project. See [CHANGELOG.md](CHANGELOG.md) for the full history.
+> **v1.1.0** - eleven themes, updated metadata and a GitHub-ready project. See [CHANGELOG.md](CHANGELOG.md) for the full history.
 
 ## Features
 
@@ -84,9 +84,9 @@ Then install the checkout folder with the plugin manager as above. The package n
 
 1. Open **Visual themes** from the sidebar.
 2. The picker shows **11 theme cards** and the currently active theme (or *Original appearance*).
-3. Choose a theme â€” the workspace changes immediately.
-4. Restart the app â€” the same theme is restored.
-5. Choose **Restore original** â€” the app returns to its pre-theme appearance.
+3. Choose a theme - the workspace changes immediately.
+4. Restart the app - the same theme is restored.
+5. Choose **Restore original** - the app returns to its pre-theme appearance.
 
 ### Upgrading from 1.0.0
 
@@ -110,7 +110,7 @@ See [INSTALL.md](INSTALL.md) for a longer walkthrough and troubleshooting.
 
 ## Usage
 
-- **Sidebar â†’ Visual themes**: opens the picker in the main area; the conversation stays loaded.
+- **Sidebar -> Visual themes**: opens the picker in the main area; the conversation stays loaded.
 - Click any card to apply that theme. The active card is outlined and checked.
 - **Restore original** at the bottom clears the theme and persists the cleared state.
 - The picker header shows the active theme name, or *Original appearance*.
@@ -132,7 +132,7 @@ The Host injects the stored value into the page as `window.__DSH_VISUAL_THEMES__
 ## How it works
 
 - **Client half** (`client.js`) registers every theme through the Client `theme` service (`ctx.theme.register`). Colour tokens and the light/dark palette attribute are applied by the host presenter exactly like the built-in themes.
-- **Scoped stylesheet**: a single plugin-owned `<style>` node adds what colour tokens cannot express â€” radii, elevation, glass blur, retro bevels, aqua gloss, typography and badge paint. Every selector is scoped under `html[data-vt]`, which the plugin sets only while one of its themes is active.
+- **Scoped stylesheet**: a single plugin-owned `<style>` node adds what colour tokens cannot express - radii, elevation, glass blur, retro bevels, aqua gloss, typography and badge paint. Every selector is scoped under `html[data-vt]`, which the plugin sets only while one of its themes is active.
 - **Sidebar + main slots**: one row is injected into `sidebar.panellist` (`id: visual-themes`, order 20) and one page into `main` (`key: visual-themes`).
 - **Host half** (`index.js`) owns the state route and injects the bootstrap state. It is try/catch guarded so a missing web server cannot break the Client.
 - **Restore original** clears the dataset attributes, sets the host preference back to the value it had before the theme was chosen, and persists `theme: null`.
@@ -141,22 +141,22 @@ The Host injects the stored value into the page as `window.__DSH_VISUAL_THEMES__
 
 ```text
 .
-â”œâ”€â”€ client.js               # Client plugin: 11 theme definitions, scoped CSS, picker, persistence
-â”œâ”€â”€ index.js                # Host plugin: state file + GET/POST /visual-themes/state + bootstrap injection
-â”œâ”€â”€ cordis.patch.yml        # Bundle patch: one sidebar/main row
-â”œâ”€â”€ package.json
-â”œâ”€â”€ icon.svg
-â”œâ”€â”€ locale/
-â”‚   â”œâ”€â”€ en.json
-â”‚   â””â”€â”€ zh.json
-â”œâ”€â”€ test/
-â”‚   â””â”€â”€ client.test.mjs     # dependency-free functional harness
-â”œâ”€â”€ assets/reference/       # design references for the 11 themes
-â”œâ”€â”€ README.md
-â”œâ”€â”€ INSTALL.md
-â”œâ”€â”€ CHANGELOG.md
-â”œâ”€â”€ LICENSE
-â””â”€â”€ DEPLOY.md
+|-- client.js               # Client plugin: 11 theme definitions, scoped CSS, picker, persistence
+|-- index.js                # Host plugin: state file + GET/POST /visual-themes/state + bootstrap injection
+|-- cordis.patch.yml        # Bundle patch: one sidebar/main row
+|-- package.json
+|-- icon.svg
+|-- locale/
+|   |-- en.json
+|   `-- zh.json
+|-- test/
+|   `-- client.test.mjs     # dependency-free functional harness
+|-- assets/reference/       # design references for the 11 themes
+|-- README.md
+|-- INSTALL.md
+|-- CHANGELOG.md
+|-- LICENSE
+`-- DEPLOY.md
 ```
 
 ## Development
@@ -174,7 +174,7 @@ The harness verifies:
 - selection, host-route persistence and the `theme/change` fallback;
 - **Restore original**, disposal and removal of the stylesheet node and data attributes.
 
-There are no dependencies; `npm install` is not required. The test uses Node's built-in `node:test`-free `assert` module.
+There are no dependencies; `npm install` is not required. The test uses Node's built-in `assert`, `fs`, `path` and `url` modules.
 
 ### Adding a theme
 
@@ -196,8 +196,8 @@ There are no dependencies; `npm install` is not required. The test uses Node's b
 
 This project follows **SemVer**:
 
-- **1.1.0** â€” current: eleven themes, renamed package `@surenkh/dsh-visual-themes`, GitHub project metadata, docs, tests, design references and release artifacts.
-- **1.0.0** â€” initial twelve-theme local bundle.
+- **1.1.0** - current: eleven themes, renamed package `@surenkh/dsh-visual-themes`, GitHub project metadata, docs, tests, design references and release artifacts.
+- **1.0.0** - initial twelve-theme local bundle.
 
 See [CHANGELOG.md](CHANGELOG.md) for details.
 
@@ -207,7 +207,7 @@ Published at **https://github.com/Surenkh/dsh-visual-themes**. Release **v1.1.0*
 
 ## License
 
-[MIT](LICENSE) Â© 2026 Suren Khachatryan.
+[MIT](LICENSE) (c) 2026 Suren Khachatryan.
 
 ## Credits
 

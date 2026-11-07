@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/) and the project uses [Semantic Versioning](https://semver.org/).
 
-## 1.1.0 — 2026-11-07
+## 1.1.0 - 2026-11-07
 
 ### Removed
 
@@ -22,7 +22,7 @@ All notable changes to this project are documented here. The format follows [Kee
 
 - The saved-state normalizer now writes the normalized (possibly empty) local state on startup, so a stale selection for a removed theme is cleared from `localStorage`.
 
-## 1.0.0 — 2026-11-06
+## 1.0.0 - 2026-11-06
 
 ### Added
 
